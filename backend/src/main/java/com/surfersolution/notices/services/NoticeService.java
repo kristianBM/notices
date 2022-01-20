@@ -4,6 +4,9 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Sort.Direction;
 import org.springframework.stereotype.Service;
 
 import com.surfersolution.notices.domain.Notice;
@@ -45,5 +48,10 @@ public class NoticeService {
 
 	public void delete(Long id) {
 		noticeRepository.deleteById(id);
+	}
+	
+	public Page<Notice> findPage(Integer page, Integer linesPerPage, String orderBy, String direction) {
+		PageRequest pageRequest = PageRequest.of(page, linesPerPage, Direction.valueOf(direction), orderBy);
+		return noticeRepository.findAll(pageRequest);
 	}
 }
