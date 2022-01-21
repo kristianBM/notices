@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort.Direction;
@@ -11,6 +12,8 @@ import org.springframework.stereotype.Service;
 
 import com.surfersolution.notices.domain.Notice;
 import com.surfersolution.notices.repositories.NoticeRepository;
+import com.surfersolution.notices.services.exceptions.DatabaseException;
+import com.surfersolution.notices.services.exceptions.ResourceNotFoundException;
 
 @Service
 public class NoticeService {
@@ -18,10 +21,10 @@ public class NoticeService {
 	@Autowired
 	private NoticeRepository noticeRepository;
 
-	public Optional<Notice> findById(Long id) {
+	public Notice findById(Long id) {
 		Optional<Notice> obj = noticeRepository.findById(id);
 
-		return obj;
+		return obj.orElseThrow(() -> new ResourceNotFoundException(id));
 	}
 
 	public List<Notice> findAll() {
@@ -47,7 +50,14 @@ public class NoticeService {
 	}
 
 	public void delete(Long id) {
-		noticeRepository.deleteById(id);
+		try {
+			noticeRepository.deleteById(id);
+		} catch(IllegalStateException e) {
+			throw new ResourceNotFoundException(id);
+		} catch (DataIntegrityViolationException e) {
+			throw new DatabaseException(e.getMessage());
+		}
+		
 	}
 	
 	public Page<Notice> findPage(Integer page, Integer linesPerPage, String orderBy, String direction) {

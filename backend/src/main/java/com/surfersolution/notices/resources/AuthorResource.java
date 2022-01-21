@@ -2,7 +2,6 @@ package com.surfersolution.notices.resources;
 
 import java.net.URI;
 import java.util.List;
-import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -34,8 +33,8 @@ public class AuthorResource {
 	}
 
 	@RequestMapping(value = "/{id}", method = RequestMethod.GET)
-	public ResponseEntity<Optional<Author>> findById(@PathVariable Long id) {
-		Optional<Author> obj = service.findById(id);
+	public ResponseEntity<Author> findById(@PathVariable Long id) {
+		Author obj = service.findById(id);
 		return ResponseEntity.ok().body(obj);
 
 	}
@@ -50,7 +49,7 @@ public class AuthorResource {
 	}
 	
 	@Transactional
-	@RequestMapping(method = RequestMethod.DELETE)
+	@RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
 	public ResponseEntity<Void> delete(@PathVariable Long id){
 		service.delete(id);
 		return ResponseEntity.noContent().build();

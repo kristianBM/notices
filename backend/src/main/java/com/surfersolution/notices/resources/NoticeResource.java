@@ -2,7 +2,6 @@ package com.surfersolution.notices.resources;
 
 import java.net.URI;
 import java.util.List;
-import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -34,8 +33,8 @@ public class NoticeResource {
 	}
 
 	@RequestMapping(value = "/{id}", method = RequestMethod.GET)
-	public ResponseEntity<Optional<Notice>> findById(@PathVariable Long id) {
-		Optional<Notice> obj = service.findById(id);
+	public ResponseEntity<Notice> findById(@PathVariable Long id) {
+		Notice obj = service.findById(id);
 		return ResponseEntity.ok().body(obj);
 
 	}
