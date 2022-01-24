@@ -2,12 +2,8 @@ package com.surfersolution.notices.domain;
 
 import java.io.Serializable;
 import java.util.Date;
-import java.util.HashSet;
 import java.util.Objects;
-import java.util.Set;
 
-import javax.persistence.CollectionTable;
-import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -37,9 +33,10 @@ public class Notice implements Serializable{
 	@JsonFormat(pattern = "dd/MM/yyyy HH:mm")
 	private Date postDate;
 	
-	@ElementCollection
-	@CollectionTable(name = "readers")
-	private Set<Reader>readers = new HashSet<>();
+// Lista de leitores para envio de newsletter(a implementar)
+//	@ElementCollection
+//	@CollectionTable(name = "readers")
+//	private Set<Reader>readers = new HashSet<>();
 	
 	public Notice() {
 		
@@ -93,13 +90,13 @@ public class Notice implements Serializable{
 		this.postDate = postDate;
 	}
 	
-	public Set<Reader> getReaders() {
-		return readers;
-	}
-
-	public void setReaders(Set<Reader> readers) {
-		this.readers = readers;
-	}
+//	public Set<Reader> getReaders() {
+//		return readers;
+//	}
+//
+//	public void setReaders(Set<Reader> readers) {
+//		this.readers = readers;
+//	}
 
 	@Override
 	public int hashCode() {
