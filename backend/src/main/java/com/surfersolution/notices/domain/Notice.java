@@ -33,11 +33,6 @@ public class Notice implements Serializable{
 	@JsonFormat(pattern = "dd/MM/yyyy HH:mm")
 	private Date postDate;
 	
-// Lista de leitores para envio de newsletter(a implementar)
-//	@ElementCollection
-//	@CollectionTable(name = "readers")
-//	private Set<Reader>readers = new HashSet<>();
-	
 	public Notice() {
 		
 	}
@@ -89,14 +84,6 @@ public class Notice implements Serializable{
 	public void setPostDate(Date postDate) {
 		this.postDate = postDate;
 	}
-	
-//	public Set<Reader> getReaders() {
-//		return readers;
-//	}
-//
-//	public void setReaders(Set<Reader> readers) {
-//		this.readers = readers;
-//	}
 
 	@Override
 	public int hashCode() {
