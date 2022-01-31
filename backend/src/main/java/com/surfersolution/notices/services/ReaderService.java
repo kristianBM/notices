@@ -3,8 +3,6 @@ package com.surfersolution.notices.services;
 import java.util.List;
 import java.util.Optional;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.data.domain.Page;
@@ -20,8 +18,9 @@ import com.surfersolution.notices.services.exceptions.ResourceNotFoundException;
 @Service
 public class ReaderService {
 
-	private static final Logger LOG = LoggerFactory.getLogger(ReaderService.class);
-
+	@Autowired
+	public Reader reader;
+	
 	@Autowired
 	private ReaderRepository readerRepository;
 
@@ -36,9 +35,8 @@ public class ReaderService {
 	}
 
 	public Reader insert(Reader obj) {
-		LOG.info("Inserindo na lista de emails");
-		obj.getEmails().add(obj.getEmail());
-		LOG.info("Inserido com sucesso");
+		reader.getEmails().add(obj.getEmail());
+
 		return readerRepository.save(obj);
 	}
 
@@ -58,7 +56,7 @@ public class ReaderService {
 	public void delete(Long id) {
 		try {
 			Reader obj = readerRepository.getById(id);
-			obj.getEmails().remove(obj.getEmail());
+			reader.getEmails().remove(obj.getEmail());
 			readerRepository.deleteById(id);
 		} catch (IllegalStateException e) {
 			throw new ResourceNotFoundException(id);
@@ -71,5 +69,5 @@ public class ReaderService {
 		PageRequest pageRequest = PageRequest.of(page, linesPerPage, Direction.valueOf(direction), orderBy);
 		return readerRepository.findAll(pageRequest);
 	}
-
+	
 }

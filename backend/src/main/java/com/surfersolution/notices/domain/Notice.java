@@ -16,25 +16,25 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 
 @Entity
 @Table(name = "tb_notices")
-public class Notice implements Serializable{
+public class Notice implements Serializable {
 	private static final long serialVersionUID = 1L;
-	
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
-	
+
 	private String title;
 	private String notice;
-	
+
 	@ManyToOne
 	@JoinColumn(name = "author_id")
 	private Author author;
-	
-	@JsonFormat(pattern = "dd/MM/yyyy HH:mm")
+
+	@JsonFormat(pattern = "dd/MM/yyyy")
 	private Date postDate;
-	
+
 	public Notice() {
-		
+
 	}
 
 	public Notice(Long id, String title, String notice, Author author, Date postDate) {
@@ -101,6 +101,5 @@ public class Notice implements Serializable{
 		Notice other = (Notice) obj;
 		return Objects.equals(id, other.id);
 	}
-	
-	
+
 }

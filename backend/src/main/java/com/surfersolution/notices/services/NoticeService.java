@@ -1,5 +1,6 @@
 package com.surfersolution.notices.services;
 
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
@@ -17,9 +18,12 @@ import com.surfersolution.notices.services.exceptions.ResourceNotFoundException;
 
 @Service
 public class NoticeService {
-
+	
 	@Autowired
 	private NoticeRepository noticeRepository;
+
+	@Autowired
+	private EmailService emailService;
 
 	public Notice findById(Long id) {
 		Optional<Notice> obj = noticeRepository.findById(id);
@@ -32,7 +36,13 @@ public class NoticeService {
 	}
 
 	public Notice insert(Notice obj) {
-		return noticeRepository.save(obj);
+		obj.setId(null);
+		obj.setTitle(obj.getTitle());
+		obj.setNotice(obj.getNotice());
+		obj.setPostDate(new Date());
+		obj = noticeRepository.save(obj);
+		emailService.sendNoticeHtmlEmail(obj);
+		return obj;
 	}
 
 	public Notice update(Long id, Notice obj) {

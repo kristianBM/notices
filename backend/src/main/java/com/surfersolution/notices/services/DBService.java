@@ -28,9 +28,9 @@ public class DBService {
 
 	public void instantiateDb() throws ParseException {
 		SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
-		Author a1 = new Author(null, "Carl Brown", "carl@gmail.com");
-		Author a2 = new Author(null, "Maria Green", "maria@gmail.com");
-		Author a3 = new Author(null, "Ana Purple", "ana@gmail.com");
+		Author a1 = new Author(null, "Carl Brown", "kristian.bonfim@hotmail.com");
+		Author a2 = new Author(null, "Maria Green", "kristian.bonfim@planoscs.com.br");
+		Author a3 = new Author(null, "Ana Purple", "matheus.kaique@planoscs.com.br");
 
 		Notice n1 = new Notice(null, "Nova Versão PHP",
 				"Neque porro quisquam est qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit...", a1,
@@ -60,9 +60,9 @@ public class DBService {
 		a2.getNotices().addAll(Arrays.asList(n3, n4));
 		a3.getNotices().addAll(Arrays.asList(n5, n6));
 
-		Reader r1 = new Reader(null, "Kristian Mello", "kristian.bonfim@hotmail.com");
-		Reader r2 = new Reader(null, "Kristian Mello Plano", "kristian.bonfim@planoscs.com");
-		Reader r3 = new Reader(null, "Kristian Mello Clinica", "kristian.bonfim@santasaudeconsultas.com");
+		Reader r1 = new Reader(null, "Kristian Mello", "kristian@hotmail.com");
+		Reader r2 = new Reader(null, "Kristian Mello Plano", "kristian@plano.com");
+		Reader r3 = new Reader(null, "Kristian Mello Clinica", "kristian@santa.com");
 		
 		readerRepository.saveAll(Arrays.asList(r1, r2, r3));
 		authorRepository.saveAll(Arrays.asList(a1, a2, a3));

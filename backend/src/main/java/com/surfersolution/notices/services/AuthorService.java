@@ -32,6 +32,7 @@ public class AuthorService {
 	}
 
 	public Author insert(Author obj) {
+		obj.setId(null);
 		return authorRepository.save(obj);
 	}
 

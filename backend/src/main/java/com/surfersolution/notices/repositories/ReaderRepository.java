@@ -7,5 +7,6 @@ import com.surfersolution.notices.domain.Reader;
 
 @Repository
 public interface ReaderRepository extends JpaRepository<Reader, Long> {
+	
 
 }
