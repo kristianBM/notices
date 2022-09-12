@@ -28,7 +28,7 @@ public class Notice implements Serializable {
 
 	@ManyToOne
 	@JoinColumn(name = "author_id")
-	private Author author;
+	private User author;
 
 	@JsonFormat(pattern = "dd/MM/yyyy")
 	private Date postDate;
@@ -37,7 +37,7 @@ public class Notice implements Serializable {
 
 	}
 
-	public Notice(Long id, String title, String notice, Author author, Date postDate) {
+	public Notice(Long id, String title, String notice, User author, Date postDate) {
 		this.id = id;
 		this.title = title;
 		this.notice = notice;
@@ -69,11 +69,11 @@ public class Notice implements Serializable {
 		this.notice = notice;
 	}
 
-	public Author getAuthor() {
+	public User getAuthor() {
 		return author;
 	}
 
-	public void setAuthor(Author author) {
+	public void setAuthor(User author) {
 		this.author = author;
 	}
 

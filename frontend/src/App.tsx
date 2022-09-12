@@ -1,23 +1,13 @@
-
-import { BrowserRouter, Routes, Route } from "react-router-dom"
-import NoticeRegister from './pages/NoticeRegister'
-import WriterRegister from './pages/WriterRegister'
-import Home from './pages/Home'
-import Navbar from "./components/Navbar";
+import './App.css'
+import LoginForm from './components/LoginForm'
 
 function App() {
 
   return (
-    <BrowserRouter>
-      <Navbar />
-      <Routes>
-        <Route path='/' element={<Home />} />
-        <Route path='/new_notice' element={<NoticeRegister />} />
-        <Route path='/new_writer' element={<WriterRegister />} />
-      </Routes>
-    </BrowserRouter>
-  );
-
+   <>
+   <LoginForm />
+   </>
+  )
 }
 
-export default App;
+export default App

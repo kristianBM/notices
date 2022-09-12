@@ -20,7 +20,7 @@ import com.surfersolution.notices.dto.NoticeDTO;
 import com.surfersolution.notices.services.NoticeService;
 
 @RestController
-@RequestMapping(value = "/api/v1/notices")
+@RequestMapping(value = "/notices")
 public class NoticeResource {
 
 	@Autowired
@@ -40,7 +40,7 @@ public class NoticeResource {
 	}
 	
 	@Transactional
-	@RequestMapping(method = RequestMethod.POST)
+	@RequestMapping(value = "/create" ,method = RequestMethod.POST)
 	public ResponseEntity<Notice> insert(@RequestBody Notice obj){
 		obj = service.insert(obj);
 		URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}")
@@ -49,14 +49,14 @@ public class NoticeResource {
 	}
 	
 	@Transactional
-	@RequestMapping(value= "/{id}", method = RequestMethod.DELETE)
+	@RequestMapping(value= "/delete/{id}", method = RequestMethod.DELETE)
 	public ResponseEntity<Void> delete(@PathVariable Long id){
 		service.delete(id);
 		return ResponseEntity.noContent().build();
 	}
 	
 	@Transactional
-	@RequestMapping(value = "/{id}", method = RequestMethod.PUT)
+	@RequestMapping(value = "/update/{id}", method = RequestMethod.PUT)
 	public ResponseEntity<Notice> update (@PathVariable Long id, @RequestBody Notice obj){
 		obj = service.update(id, obj);
 		return ResponseEntity.ok().body(obj);
