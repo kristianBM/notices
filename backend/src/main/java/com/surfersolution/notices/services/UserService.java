@@ -1,6 +1,5 @@
 package com.surfersolution.notices.services;
 
-import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,6 +8,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort.Direction;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import com.surfersolution.notices.domain.User;
@@ -24,6 +24,8 @@ public class UserService {
 	
 	@Autowired
 	private UserRepository userRepository;
+	
+	private BCryptPasswordEncoder pe;
 
 	public User findById(Long id) {
 		Optional<User> obj = userRepository.findById(id);
@@ -37,7 +39,7 @@ public class UserService {
 
 	public User insert(User obj) {
 		obj.setId(null);
-
+		obj.setPassword(pe.encode(obj.getPassword()));
 		return userRepository.save(obj);
 	}
 

@@ -49,13 +49,10 @@ body, html {
   text-align: center;
 }
 
-.login-form-title img {
-  width: 90px;
-}
-
 .wrap-input {
   width: 100%;
   position: relative;
+  padding: 20px 0px 0px 0px;
   border-bottom: 2px solid #adadad;
   margin-bottom: 37px;
 }
